@@ -271,11 +271,12 @@
                                 <i data-lucide="chevron-right" class="w-6 h-6"></i>
                             </button>
 
-                            <!-- Imagem da Camiseta -->
-                            <div class="relative w-full h-full flex items-center justify-center p-8 transition-opacity duration-300" id="shirt-container">
-                                <img id="shirt-image" src="assets/camiseta-verde.jpeg" alt="Camiseta Verde" class="max-h-full max-w-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500">
+                            <!-- Imagem da Camiseta (Full Cover) -->
+                            <div class="relative w-full h-full transition-opacity duration-300" id="shirt-container">
+                                <!-- w-full h-full object-cover para preencher o quadrado -->
+                                <img id="shirt-image" src="assets/camiseta_verde.jpeg" alt="Camiseta Verde" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                                 
-                                <span id="shirt-counter" class="absolute bottom-16 text-xs font-cinzel font-bold uppercase tracking-widest opacity-90 bg-black/40 text-white px-4 py-1.5 rounded-full backdrop-blur-sm">
+                                <span id="shirt-counter" class="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-xs font-cinzel font-bold uppercase tracking-widest opacity-90 bg-black/40 text-white px-4 py-1.5 rounded-full backdrop-blur-sm">
                                     Opção 1 de 3
                                 </span>
                             </div>
@@ -658,66 +659,13 @@
                 name: "Modelo 'Fé e Obras' - Verde",
                 colorClass: "bg-[#2E5D34]",
                 description: "Estampa exclusiva com o brasão em dourado sobre o verde litúrgico.",
-                image: "assets/camiseta-verde.jpeg"
+                image: "assets/camiseta_verde.jpeg"
             },
             {
                 name: "Modelo 'Penitência' - Roxo",
                 colorClass: "bg-[#4C1D95]",
                 description: "A cor da conversão e preparação. Ideal para viver o tempo da Quaresma.",
-                image: "assets/camiseta-roxa.jpeg"
+                image: "assets/camiseta_roxa.jpeg"
             },
             {
-                name: "Modelo 'Luz do Mundo' - Branca",
-                colorClass: "bg-[#F5F5F4]",
-                description: "Design minimalista e elegante para o dia a dia, com detalhes em dourado.",
-                image: "assets/camiseta-branca.jpeg"
-            }
-        ];
-        
-        let activeShirtIndex = 0;
-
-        function updateCarousel() {
-            const shirt = shirts[activeShirtIndex];
-            const bgElement = document.getElementById('carousel-bg');
-            const imgElement = document.getElementById('shirt-image');
-            const nameElement = document.getElementById('shirt-name');
-            const descElement = document.getElementById('shirt-desc');
-            const counterElement = document.getElementById('shirt-counter');
-            const indicatorsContainer = document.getElementById('carousel-indicators');
-
-            // Update Color Background (Remove old color classes first)
-            bgElement.className = `h-96 relative flex items-center justify-center transition-colors duration-500 ease-in-out overflow-hidden ${shirt.colorClass}`;
-
-            // Update Content
-            imgElement.src = shirt.image;
-            imgElement.alt = shirt.name;
-            nameElement.innerText = shirt.name;
-            descElement.innerText = shirt.description + " Tecido DryFit de alta qualidade, perfeito para usar em eventos e celebrações.";
-            counterElement.innerText = `Opção ${activeShirtIndex + 1} de 3`;
-
-            // Update Indicators
-            indicatorsContainer.innerHTML = '';
-            shirts.forEach((_, idx) => {
-                const dot = document.createElement('button');
-                dot.onclick = () => { activeShirtIndex = idx; updateCarousel(); };
-                dot.className = `w-2.5 h-2.5 rounded-full transition-all shadow-sm ${idx === activeShirtIndex ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/60'}`;
-                indicatorsContainer.appendChild(dot);
-            });
-        }
-
-        function nextShirt() {
-            activeShirtIndex = (activeShirtIndex + 1) % shirts.length;
-            updateCarousel();
-        }
-
-        function prevShirt() {
-            activeShirtIndex = (activeShirtIndex === 0) ? shirts.length - 1 : activeShirtIndex - 1;
-            updateCarousel();
-        }
-
-        // Initialize Carousel
-        updateCarousel();
-
-    </script>
-</body>
-</html>
+                name: "Modelo 'Luz do Mundo' - Br
