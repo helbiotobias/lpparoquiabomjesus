@@ -8,7 +8,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Importando Playfair Display (Estilo Lavish) e Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,24 +20,29 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#C05832', // Terracota
-                        primaryHover: '#A04625',
-                        green: '#2E5D34', // Verde Institucional
-                        greenDark: '#1A3C20', // Verde Escuro
-                        accent: '#EAB308', // Dourado
+                        primary: '#f69540', // Laranja ID Visual
+                        primaryHover: '#d97f30', 
+                        green: '#62693f', // Verde Oliva ID Visual
+                        greenDark: '#500c09', // Vinho/Borgonha ID Visual
+                        accent: '#f69540', 
                     },
                     fontFamily: {
-                        cinzel: ['Cinzel', 'serif'],
-                        sans: ['Lato', 'sans-serif'],
+                        lavish: ['"Playfair Display"', 'serif'],
+                        sans: ['"Nunito"', 'sans-serif'],
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.8s ease-out',
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         }
                     }
                 }
@@ -48,17 +54,37 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Custom Styles needed for specific effects */
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+        /* Textura Granulada (ID Visual - Texturas) */
+        .texture-grain {
+            position: relative;
+            overflow: hidden;
+        }
+        .texture-grain::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        
+        /* Sombra Suave (ID Visual - Efeitos) */
+        .shadow-soft {
+            box-shadow: 0 20px 40px -15px rgba(80, 12, 9, 0.15);
+        }
+
         .bg-pattern {
             background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
         }
         .bg-concrete {
             background-image: url('https://www.transparenttextures.com/patterns/concrete-wall.png');
         }
-        /* Transition for carousel background */
         #carousel-bg {
             transition: background-color 0.5s ease-in-out;
         }
@@ -70,19 +96,19 @@
     <header id="main-header" class="fixed w-full z-50 transition-all duration-300 py-5 bg-transparent">
         <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <!-- Logo Image (Increased size slightly since text is gone) -->
-                <img src="assets/logo.png" alt="Logo Nova Paróquia" class="h-14 w-auto object-contain drop-shadow-md">
+                <!-- Logo Image (Reduced size by ~30%: h-44 -> h-32) -->
+                <img src="assets/logo.png" alt="Logo Nova Paróquia" class="h-32 w-auto object-contain drop-shadow-md">
             </div>
 
             <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center gap-6 lg:gap-8">
-                <a href="#quaresma" class="text-sm font-sans font-medium text-white/90 hover:text-accent transition-colors tracking-wide">Campanha 40 Dias</a>
-                <a href="#produtos" class="text-sm font-sans font-medium text-white/90 hover:text-accent transition-colors tracking-wide">Produtos</a>
-                <a href="#sao-jose" class="text-sm font-sans font-medium text-white/90 hover:text-accent transition-colors tracking-wide">Clube São José</a>
-                <a href="#projeto" class="text-sm font-sans font-medium text-white/90 hover:text-accent transition-colors tracking-wide">O Projeto</a>
-                <a href="#como-ajudar" class="text-sm font-sans font-medium text-white/90 hover:text-accent transition-colors tracking-wide">Como Ajudar</a>
+                <a href="#quaresma" class="text-sm font-sans font-bold text-white/90 hover:text-accent transition-colors tracking-wide">Campanha 40 Dias</a>
+                <a href="#produtos" class="text-sm font-sans font-bold text-white/90 hover:text-accent transition-colors tracking-wide">Produtos</a>
+                <a href="#sao-jose" class="text-sm font-sans font-bold text-white/90 hover:text-accent transition-colors tracking-wide">Clube São José</a>
+                <a href="#projeto" class="text-sm font-sans font-bold text-white/90 hover:text-accent transition-colors tracking-wide">O Projeto</a>
+                <a href="#como-ajudar" class="text-sm font-sans font-bold text-white/90 hover:text-accent transition-colors tracking-wide">Como Ajudar</a>
                 
-                <a href="#como-ajudar" class="px-6 py-2.5 rounded-sm font-bold text-white text-sm transition-all hover:-translate-y-0.5 shadow-lg flex items-center gap-2 border border-accent/30 bg-primary">
+                <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20doa%C3%A7%C3%A3o%20para%20a%20Nova%20Par%C3%B3quia." target="_blank" class="px-6 py-2.5 rounded-sm font-bold text-white text-sm transition-all hover:-translate-y-0.5 shadow-lg flex items-center gap-2 border border-accent/30 bg-primary texture-grain font-nunito">
                     <i data-lucide="heart" class="w-4 h-4 fill-current"></i> DOAR AGORA
                 </a>
             </nav>
@@ -96,11 +122,11 @@
         <!-- Mobile Nav -->
         <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-greenDark shadow-xl border-t border-white/10">
             <div class="flex flex-col p-6 space-y-4">
-                <a href="#quaresma" class="text-white/80 font-cinzel text-lg hover:text-accent border-b border-white/5 pb-2 mobile-link">Campanha 40 Dias</a>
-                <a href="#produtos" class="text-white/80 font-cinzel text-lg hover:text-accent border-b border-white/5 pb-2 mobile-link">Produtos</a>
-                <a href="#sao-jose" class="text-white/80 font-cinzel text-lg hover:text-accent border-b border-white/5 pb-2 mobile-link">Clube São José</a>
-                <a href="#projeto" class="text-white/80 font-cinzel text-lg hover:text-accent border-b border-white/5 pb-2 mobile-link">O Projeto</a>
-                <a href="#como-ajudar" class="w-full text-center py-3 rounded-sm font-bold text-white flex justify-center items-center gap-2 mt-4 bg-primary mobile-link">
+                <a href="#quaresma" class="text-white/80 font-lavish text-xl hover:text-accent border-b border-white/5 pb-2 mobile-link">Campanha 40 Dias</a>
+                <a href="#produtos" class="text-white/80 font-lavish text-xl hover:text-accent border-b border-white/5 pb-2 mobile-link">Produtos</a>
+                <a href="#sao-jose" class="text-white/80 font-lavish text-xl hover:text-accent border-b border-white/5 pb-2 mobile-link">Clube São José</a>
+                <a href="#projeto" class="text-white/80 font-lavish text-xl hover:text-accent border-b border-white/5 pb-2 mobile-link">O Projeto</a>
+                <a href="#como-ajudar" class="w-full text-center py-3 rounded-sm font-bold text-white flex justify-center items-center gap-2 mt-4 bg-primary texture-grain mobile-link font-sans">
                     <i data-lucide="heart" class="w-4 h-4"></i> DOAR AGORA
                 </a>
             </div>
@@ -108,36 +134,36 @@
     </header>
 
     <!-- FLOATING COUNTDOWN -->
-    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 w-[95%] md:w-auto">
-        <div class="bg-greenDark/95 backdrop-blur-md text-white px-4 md:px-6 py-3 rounded-full shadow-2xl border border-accent/30 flex items-center justify-between md:justify-center gap-3 md:gap-8">
+    <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 w-fit max-w-[95%]">
+        <div class="bg-greenDark/95 backdrop-blur-md text-white px-5 py-3 rounded-full shadow-2xl border border-accent/30 flex items-center justify-center gap-4 md:gap-8 texture-grain shadow-soft">
             <div class="flex items-center gap-2 shrink-0">
-                <i data-lucide="clock" class="w-[18px] h-[18px] text-accent animate-pulse"></i>
-                <span class="text-[10px] md:text-sm font-sans uppercase tracking-widest text-white/80">Fim da Campanha:</span>
+                <i data-lucide="clock" class="w-4 h-4 md:w-5 md:h-5 text-accent animate-pulse"></i>
+                <span class="text-[10px] md:text-sm font-sans font-bold uppercase tracking-widest text-white/80 whitespace-nowrap">Fim da Campanha:</span>
             </div>
 
-            <div class="flex gap-2 md:gap-4 font-cinzel text-center tabular-nums">
+            <div class="flex gap-2 md:gap-4 font-lavish text-center tabular-nums items-center">
                 <div class="flex flex-col items-center">
-                    <span id="timer-days" class="block text-lg md:text-xl font-bold text-accent leading-none w-8 text-center">00</span>
-                    <span class="text-[8px] md:text-[10px] uppercase text-white/60">Dias</span>
+                    <span id="timer-days" class="block text-lg md:text-xl font-bold text-accent leading-none min-w-[1.2em] text-center">00</span>
+                    <span class="text-[8px] md:text-[10px] uppercase text-white/60 font-sans">Dias</span>
                 </div>
-                <div class="text-white/30 text-lg font-light flex flex-col justify-start leading-none pt-1">:</div>
+                <div class="text-white/30 text-lg font-light pb-2">:</div>
                 <div class="flex flex-col items-center">
-                    <span id="timer-hours" class="block text-lg md:text-xl font-bold text-white leading-none w-8 text-center">00</span>
-                    <span class="text-[8px] md:text-[10px] uppercase text-white/60">Hrs</span>
+                    <span id="timer-hours" class="block text-lg md:text-xl font-bold text-white leading-none min-w-[1.2em] text-center">00</span>
+                    <span class="text-[8px] md:text-[10px] uppercase text-white/60 font-sans">Hrs</span>
                 </div>
-                <div class="text-white/30 text-lg font-light flex flex-col justify-start leading-none pt-1">:</div>
+                <div class="text-white/30 text-lg font-light pb-2">:</div>
                 <div class="flex flex-col items-center">
-                    <span id="timer-minutes" class="block text-lg md:text-xl font-bold text-white leading-none w-8 text-center">00</span>
-                    <span class="text-[8px] md:text-[10px] uppercase text-white/60">Min</span>
+                    <span id="timer-minutes" class="block text-lg md:text-xl font-bold text-white leading-none min-w-[1.2em] text-center">00</span>
+                    <span class="text-[8px] md:text-[10px] uppercase text-white/60 font-sans">Min</span>
                 </div>
-                <div class="text-white/30 text-lg font-light hidden sm:flex flex-col justify-start leading-none pt-1">:</div>
+                <div class="text-white/30 text-lg font-light hidden sm:block pb-2">:</div>
                 <div class="hidden sm:flex flex-col items-center">
-                    <span id="timer-seconds" class="block text-lg md:text-xl font-bold text-primary leading-none w-8 text-center">00</span>
-                    <span class="text-[8px] md:text-[10px] uppercase text-white/60">Seg</span>
+                    <span id="timer-seconds" class="block text-lg md:text-xl font-bold text-primary leading-none min-w-[1.2em] text-center">00</span>
+                    <span class="text-[8px] md:text-[10px] uppercase text-white/60 font-sans">Seg</span>
                 </div>
             </div>
 
-            <a href="#como-ajudar" class="hidden md:flex bg-primary hover:bg-primaryHover text-white text-xs font-bold px-4 py-2 rounded-full transition-colors uppercase tracking-wider items-center gap-1 shrink-0">
+            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Vi%20a%20contagem%20regressiva%20e%20quero%20doar%20para%20a%20campanha." target="_blank" class="hidden md:flex bg-primary hover:bg-primaryHover text-white text-xs font-bold px-4 py-2 rounded-full transition-colors uppercase tracking-wider items-center gap-1 shrink-0 font-sans texture-grain shadow-md">
                 Doar <i data-lucide="arrow-right" class="w-3 h-3"></i>
             </a>
         </div>
@@ -146,17 +172,19 @@
     <main>
         <!-- HERO SECTION -->
         <section id="quaresma" class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-green">
-            <!-- Background Patterns -->
-            <div class="absolute inset-0 z-0">
-                <div class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-accent rounded-full opacity-20 blur-3xl"></div>
-                <div class="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary rounded-full opacity-10 blur-3xl"></div>
+            <!-- Background Visual ID Elements -->
+            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                <!-- Large Orange Circle (ID Visual: Formas) -->
+                <div class="absolute -top-[10%] -right-[10%] w-[800px] h-[800px] bg-primary rounded-full opacity-20 blur-3xl mix-blend-screen animate-float"></div>
+                <!-- Secondary Circle -->
+                <div class="absolute top-1/2 left-[-10%] w-[500px] h-[500px] bg-primary rounded-full opacity-10 blur-3xl mix-blend-screen"></div>
+                <!-- Pattern -->
                 <div class="absolute inset-0 bg-pattern opacity-10"></div>
             </div>
 
             <div class="container mx-auto px-4 z-10 relative mt-4">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     
-                    <!-- Left Content -->
                     <div class="text-left animate-fade-in-up">
                         <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/10 border border-accent/30 backdrop-blur-md mb-8">
                             <i data-lucide="calendar" class="w-4 h-4 text-accent"></i>
@@ -165,36 +193,34 @@
                             </span>
                         </div>
                         
-                        <h1 class="font-cinzel text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
-                            <span class="block text-accent text-2xl md:text-3xl font-normal mb-2 tracking-widest uppercase">Construção da Igreja</span>
+                        <h1 class="font-lavish text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
+                            <span class="block text-accent text-2xl md:text-3xl font-normal mb-2 tracking-widest uppercase font-lavish">Construção da Igreja</span>
                             Senhor <br/> Bom Jesus
                         </h1>
                         
-                        <div class="w-24 h-1 bg-primary mb-8"></div>
+                        <div class="w-24 h-1 bg-primary mb-8 rounded-full"></div>
 
                         <p class="font-sans text-lg text-white/90 mb-10 font-light max-w-xl leading-relaxed border-l-2 border-white/20 pl-6">
                             "A obra não é apenas estrutural. Ela é unidade, conversão e evangelização." <br/>
-                            <strong class="text-accent font-normal">Mobilize sua fé nestes 40 Dias.</strong>
+                            <strong class="text-accent font-bold">Mobilize sua fé nestes 40 Dias.</strong>
                         </p>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#como-ajudar" class="px-8 py-4 rounded-sm bg-primary text-white font-bold font-sans hover:bg-primaryHover transition-all shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2 tracking-wide uppercase text-sm">
+                            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Gostaria%20de%20saber%20como%20posso%20ajudar%20na%20constru%C3%A7%C3%A3o%20da%20igreja." target="_blank" class="px-8 py-4 rounded-sm bg-primary text-white font-bold font-sans hover:bg-primaryHover transition-all shadow-lg hover:shadow-primary/25 flex items-center justify-center gap-2 tracking-wide uppercase text-sm texture-grain">
                                 <i data-lucide="brick-wall" class="w-5 h-5"></i> Quero Ajudar
                             </a>
-                            <a href="#sao-jose" class="px-8 py-4 rounded-sm bg-transparent border border-white/30 text-white font-bold font-sans hover:bg-white/10 transition-all flex items-center justify-center gap-2 uppercase text-sm">
+                            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Tenho%20interesse%20em%20saber%20mais%20sobre%20o%20Clube%20S%C3%A3o%20Jos%C3%A9." target="_blank" class="px-8 py-4 rounded-sm bg-transparent border border-white/30 text-white font-bold font-sans hover:bg-white/10 transition-all flex items-center justify-center gap-2 uppercase text-sm">
                                 <i data-lucide="shield" class="w-5 h-5"></i> Clube São José
                             </a>
                         </div>
                     </div>
 
-                    <!-- Right Content: Progress Card -->
                     <div class="relative">
-                        <div class="relative z-10 bg-white p-2 rounded-t-full rounded-b-lg shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md mx-auto">
-                            <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white z-20 shadow-lg">
+                        <div class="relative z-10 bg-white p-2 rounded-t-full rounded-b-lg shadow-soft transform rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md mx-auto">
+                            <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white z-20 shadow-lg texture-grain">
                                 <i data-lucide="hammer" class="w-5 h-5"></i>
                             </div>
                             
-                            <!-- Foto da Igreja (AUMENTADA 300% com scale-150 e container maior) -->
                             <div class="rounded-t-full rounded-b-lg w-full h-[500px] bg-gradient-to-b from-stone-50 to-white flex items-end justify-center overflow-visible relative">
                                 <img src="assets/igreja.png" alt="Projeto da Nova Igreja" class="w-full h-full object-contain scale-150 origin-bottom hover:scale-[1.6] transition-transform duration-700 relative z-10 drop-shadow-xl p-4" onerror="this.style.display='none'; document.getElementById('placeholder-church').style.display='flex'">
                                 <div id="placeholder-church" class="absolute inset-0 hidden items-center justify-center text-stone-200 z-0">
@@ -202,18 +228,17 @@
                                 </div>
                             </div>
                             
-                            <!-- Termômetro -->
                             <div class="p-6 bg-white rounded-b-lg relative z-20 border-t border-stone-100">
                                 <div class="flex justify-between items-end mb-2">
                                     <div>
-                                        <h3 class="font-cinzel text-green font-bold text-lg">Termômetro da Obra</h3>
-                                        <p class="text-xs text-stone-500 font-sans uppercase tracking-wider">Meta Pública Atual</p>
+                                        <h3 class="font-lavish text-green font-bold text-lg">Termômetro da Obra</h3>
+                                        <p class="text-xs text-stone-500 font-sans uppercase tracking-wider font-bold">Meta Pública Atual</p>
                                     </div>
-                                    <span class="text-4xl font-bold text-primary font-cinzel">33.12%</span>
+                                    <span class="text-4xl font-bold text-primary font-lavish">33.12%</span>
                                 </div>
                                 
                                 <div class="h-4 w-full bg-stone-200 rounded-full overflow-hidden mb-3">
-                                    <div id="progress-bar" class="h-full rounded-full relative transition-all duration-[2500ms] ease-out bg-green w-0">
+                                    <div id="progress-bar" class="h-full rounded-full relative transition-all duration-[2500ms] ease-out bg-green w-0 texture-grain">
                                         <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
                                     </div>
                                 </div>
@@ -223,8 +248,6 @@
                                 </p>
                             </div>
                         </div>
-                        
-                        <!-- Decorative Element Behind -->
                         <div class="absolute top-10 right-10 w-full h-full border-2 border-accent/30 rounded-t-full rounded-b-lg -z-0 transform translate-x-4 translate-y-4"></div>
                     </div>
                 </div>
@@ -238,7 +261,7 @@
                     <div class="inline-flex items-center justify-center p-2 bg-green/10 rounded-full mb-4">
                         <i data-lucide="shirt" class="text-green w-6 h-6"></i>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-greenDark mb-4">
+                    <h2 class="text-4xl md:text-5xl font-lavish font-bold text-greenDark mb-4">
                         Vista a Camisa
                     </h2>
                     <p class="text-stone-600 max-w-2xl mx-auto text-lg font-serif italic">
@@ -249,15 +272,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
                     
                     <!-- Card: Camiseta (Carrossel) -->
-                    <div class="group relative bg-[#F2F7F4] rounded-sm overflow-hidden border border-stone-200 hover:border-primary transition-all duration-300 flex flex-col shadow-lg">
-                        <div class="absolute top-4 right-4 z-10 bg-accent text-greenDark text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-sm shadow-md">
+                    <div class="group relative bg-[#F2F7F4] rounded-sm overflow-hidden border border-stone-200 hover:border-primary transition-all duration-300 flex flex-col shadow-soft">
+                        <div class="absolute top-4 right-4 z-10 bg-accent text-greenDark text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-sm shadow-md texture-grain text-white">
                             3 Opções Disponíveis
                         </div>
                         
-                        <!-- Área do Carrossel -->
-                        <div id="carousel-bg" class="h-96 relative flex items-center justify-center bg-[#2E5D34] overflow-hidden">
-                            
-                            <!-- Navegação (Event Listeners corrigidos no JS) -->
+                        <div id="carousel-bg" class="h-96 relative flex items-center justify-center bg-[#62693f] overflow-hidden texture-grain">
                             <button id="prev-btn" class="absolute left-4 z-20 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors backdrop-blur-sm cursor-pointer">
                                 <i data-lucide="chevron-left" class="w-6 h-6"></i>
                             </button>
@@ -265,58 +285,52 @@
                                 <i data-lucide="chevron-right" class="w-6 h-6"></i>
                             </button>
 
-                            <!-- Imagem da Camiseta -->
                             <div class="relative w-full h-full flex items-center justify-center transition-opacity duration-300" id="shirt-container">
                                 <img id="shirt-image" src="assets/camiseta_verde.jpeg" alt="Camiseta Verde" class="w-full h-full object-cover drop-shadow-2xl hover:scale-105 transition-transform duration-500">
-                                
-                                <span id="shirt-counter" class="absolute bottom-16 text-xs font-cinzel font-bold uppercase tracking-widest opacity-90 bg-black/40 text-white px-4 py-1.5 rounded-full backdrop-blur-sm">
+                                <span id="shirt-counter" class="absolute bottom-16 text-xs font-lavish font-bold uppercase tracking-widest opacity-90 bg-black/40 text-white px-4 py-1.5 rounded-full backdrop-blur-sm">
                                     Opção 1 de 3
                                 </span>
                             </div>
 
-                            <!-- Indicadores -->
-                            <div class="absolute bottom-6 flex gap-2 z-20" id="carousel-indicators">
-                                <!-- Indicators generated by JS -->
-                            </div>
+                            <div class="absolute bottom-6 flex gap-2 z-20" id="carousel-indicators"></div>
                         </div>
                         
                         <div class="p-8 flex flex-col flex-grow bg-white">
                             <div class="mb-4">
-                                <h3 id="shirt-title" class="font-cinzel text-2xl font-bold text-greenDark">Camiseta Oficial 2026</h3>
-                                <p id="shirt-name" class="text-primary text-xs font-bold uppercase tracking-widest mt-1">
+                                <h3 id="shirt-title" class="font-lavish text-2xl font-bold text-greenDark">Camiseta Oficial 2026</h3>
+                                <p id="shirt-name" class="text-primary text-xs font-bold uppercase tracking-widest mt-1 font-sans">
                                     Modelo 'Fé e Obras' - Verde
                                 </p>
                             </div>
                             <p id="shirt-desc" class="text-stone-600 mb-6 font-sans text-sm flex-grow leading-relaxed">
                                 Estampa exclusiva com o brasão em dourado sobre o verde litúrgico. Tecido DryFit de alta qualidade.
                             </p>
-                            <button class="w-full py-3 bg-green text-white font-bold uppercase tracking-widest text-sm hover:bg-greenDark transition-colors flex items-center justify-center gap-2 rounded-sm mt-auto shadow-md">
+                            <a id="shirt-btn" href="#" target="_blank" class="w-full py-3 bg-green text-white font-bold uppercase tracking-widest text-sm hover:bg-greenDark transition-colors flex items-center justify-center gap-2 rounded-sm mt-auto shadow-md font-sans texture-grain">
                                 <i data-lucide="shopping-bag" class="w-4 h-4"></i> Encomendar Modelo
-                            </button>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Card: Tijolinho (IMAGEM AUMENTADA) -->
-                    <div class="group relative bg-[#F2F7F4] rounded-sm overflow-hidden border border-stone-200 hover:border-primary transition-all duration-300 flex flex-col shadow-lg">
-                        <div class="absolute top-4 right-4 z-10 bg-primary text-white text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-sm shadow-md">
+                    <!-- Card: Tijolinho -->
+                    <div class="group relative bg-[#F2F7F4] rounded-sm overflow-hidden border border-stone-200 hover:border-primary transition-all duration-300 flex flex-col shadow-soft">
+                        <div class="absolute top-4 right-4 z-10 bg-primary text-white text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-sm shadow-md texture-grain">
                             Símbolo de Fé
                         </div>
                         
                         <div class="h-96 bg-stone-200 flex items-center justify-center relative overflow-hidden group-hover:bg-stone-300 transition-colors">
                             <div class="flex flex-col items-center transform group-hover:scale-105 transition-transform duration-500 w-full h-full">
-                                <!-- Classe w-10/12 para ocupar 83% da largura do card -->
                                 <img src="assets/tijolinho.png" alt="Tijolinho da Quaresma" class="w-full h-full object-cover drop-shadow-xl">
                             </div>
                         </div>
                         
                         <div class="p-8 flex flex-col flex-grow bg-white">
-                            <h3 class="font-cinzel text-2xl font-bold text-greenDark mb-2">Tijolinho da Quaresma</h3>
+                            <h3 class="font-lavish text-2xl font-bold text-greenDark mb-2">Tijolinho da Quaresma</h3>
                             <p class="text-stone-600 mb-6 font-sans text-sm flex-grow leading-relaxed">
                                 Um gesto concreto de participação. Leve para casa este símbolo e reze conosco pela construção. Cada tijolinho representa sua família nesta obra.
                             </p>
-                            <button class="w-full py-3 bg-[#1C1917] text-white font-bold uppercase tracking-widest text-sm hover:bg-[#333] transition-colors flex items-center justify-center gap-2 rounded-sm shadow-md">
+                            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Quero%20adquirir%20o%20Tijolinho%20da%20Quaresma." target="_blank" class="w-full py-3 bg-[#1C1917] text-white font-bold uppercase tracking-widest text-sm hover:bg-[#333] transition-colors flex items-center justify-center gap-2 rounded-sm shadow-md font-sans">
                                 <i data-lucide="heart" class="w-4 h-4"></i> Adquirir Símbolo
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -326,6 +340,9 @@
 
         <!-- CLUBE SÃO JOSÉ -->
         <section id="sao-jose" class="py-20 md:py-28 relative overflow-hidden bg-[#F2F7F4]">
+            <!-- Visual ID Background Element -->
+            <div class="absolute -right-[10%] top-[20%] w-[600px] h-[600px] bg-primary rounded-full opacity-10 blur-3xl pointer-events-none"></div>
+            
             <div class="absolute top-0 right-0 opacity-5 -z-0">
                  <i data-lucide="church" class="w-[600px] h-[600px] text-green"></i>
             </div>
@@ -338,21 +355,21 @@
                             <i data-lucide="shield" class="w-4 h-4"></i>
                             <span>19 de Março - Dia de São José</span>
                         </div>
-                        <h2 class="font-cinzel text-4xl md:text-5xl font-bold text-greenDark mb-6 leading-tight">
+                        <h2 class="font-lavish text-4xl md:text-5xl font-bold text-greenDark mb-6 leading-tight">
                             Torne-se um <br/><span class="text-primary border-b-4 border-accent">Guardião da Obra</span>
                         </h2>
                         <p class="text-lg text-stone-700 mb-8 leading-relaxed font-serif">
                             Assim como São José protegeu a Sagrada Família, convidamos você a proteger o futuro desta construção.
                         </p>
                         
-                        <div class="bg-white p-8 rounded-sm shadow-xl border-l-4 border-primary">
+                        <div class="bg-white p-8 rounded-sm shadow-soft border-l-4 border-primary">
                             <div class="space-y-6">
                                 <div class="flex items-start gap-4">
                                     <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center shrink-0 text-[#B45309]">
                                         <i data-lucide="users" class="w-5 h-5"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-cinzel font-bold text-green text-lg">A Força da Comunidade</h4>
+                                        <h4 class="font-lavish font-bold text-green text-lg">A Força da Comunidade</h4>
                                         <p class="text-stone-600 text-sm font-sans">Empresários e chefes de família unidos pelo propósito de edificar.</p>
                                     </div>
                                 </div>
@@ -362,25 +379,25 @@
                                         <i data-lucide="calendar" class="w-5 h-5"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-cinzel font-bold text-green text-lg">Recorrência Mensal</h4>
+                                        <h4 class="font-lavish font-bold text-green text-lg">Recorrência Mensal</h4>
                                         <p class="text-stone-600 text-sm font-sans">Pequenas contribuições mensais (Ex: R$ 200,00) que garantem o ritmo da obra.</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="mt-8 w-full py-4 bg-green text-white rounded-sm font-bold hover:bg-greenDark transition-colors flex items-center justify-center gap-2 shadow-lg uppercase tracking-wide text-sm font-sans">
+                            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Quero%20me%20tornar%20um%20Guardi%C3%A3o%20da%20Obra%20no%20Clube%20S%C3%A3o%20Jos%C3%A9." target="_blank" class="mt-8 w-full py-4 bg-green text-white rounded-sm font-bold hover:bg-greenDark transition-colors flex items-center justify-center gap-2 shadow-lg uppercase tracking-wide text-sm font-sans texture-grain">
                                 Entrar para o Clube São José <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
                     <div class="lg:w-1/2 relative order-1 lg:order-2">
-                        <div class="relative rounded-t-[10rem] rounded-b-lg overflow-hidden shadow-2xl border-[6px] border-white">
+                        <div class="relative rounded-t-[10rem] rounded-b-lg overflow-hidden shadow-soft border-[6px] border-white">
                             <div class="absolute inset-0 bg-gradient-to-t from-green/80 to-transparent mix-blend-multiply z-10"></div>
                             <img src="https://images.unsplash.com/photo-1510936111840-65e151ad71bb?q=80&w=2090&auto=format&fit=crop" alt="Estátua São José" class="w-full h-auto object-cover">
                             
                             <div class="absolute bottom-0 left-0 right-0 p-8 z-20 text-center">
-                                <p class="font-cinzel text-white text-xl font-bold">"São José é o modelo.<br/> A comunidade é a força."</p>
+                                <p class="font-lavish text-white text-xl font-bold">"São José é o modelo.<br/> A comunidade é a força."</p>
                             </div>
                         </div>
                     </div>
@@ -394,7 +411,7 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16 max-w-3xl mx-auto">
                     <span class="text-primary font-bold tracking-widest text-sm uppercase mb-2 block font-sans">Nosso Propósito</span>
-                    <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-green mb-6">Mais Que Uma Estrutura</h2>
+                    <h2 class="text-4xl md:text-5xl font-lavish font-bold text-green mb-6">Mais Que Uma Estrutura</h2>
                     <div class="w-24 h-1 mx-auto bg-accent mb-8"></div>
                     <p class="text-stone-600 text-lg font-serif italic">
                         "O novo projeto foi desenhado para ser um marco de fé. Não construímos apenas paredes, mas espaços de encontro com o Sagrado."
@@ -403,35 +420,35 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <!-- Feature 1 -->
-                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default">
+                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default shadow-soft">
                         <div class="w-14 h-14 rounded-full bg-white group-hover:bg-white/10 flex items-center justify-center mb-6 text-green group-hover:text-accent transition-colors duration-300 shadow-sm">
                             <i data-lucide="users" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-cinzel font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Unidade</h3>
+                        <h3 class="text-xl font-lavish font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Unidade</h3>
                         <p class="text-stone-600 group-hover:text-white/80 text-sm leading-relaxed transition-colors font-sans">Um espaço amplo capaz de acolher toda a família paroquial em uma só celebração.</p>
                     </div>
                     <!-- Feature 2 -->
-                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default">
+                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default shadow-soft">
                         <div class="w-14 h-14 rounded-full bg-white group-hover:bg-white/10 flex items-center justify-center mb-6 text-green group-hover:text-accent transition-colors duration-300 shadow-sm">
                             <i data-lucide="heart" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-cinzel font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Conversão</h3>
+                        <h3 class="text-xl font-lavish font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Conversão</h3>
                         <p class="text-stone-600 group-hover:text-white/80 text-sm leading-relaxed transition-colors font-sans">Ambientes propícios para o encontro pessoal com Cristo e a mudança de vida.</p>
                     </div>
                     <!-- Feature 3 -->
-                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default">
+                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default shadow-soft">
                         <div class="w-14 h-14 rounded-full bg-white group-hover:bg-white/10 flex items-center justify-center mb-6 text-green group-hover:text-accent transition-colors duration-300 shadow-sm">
                             <i data-lucide="handshake" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-cinzel font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Compromisso</h3>
+                        <h3 class="text-xl font-lavish font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Compromisso</h3>
                         <p class="text-stone-600 group-hover:text-white/80 text-sm leading-relaxed transition-colors font-sans">Salas pastorais e espaços de formação para fortalecer nossa missão no mundo.</p>
                     </div>
                     <!-- Feature 4 -->
-                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default">
+                    <div class="group p-8 bg-[#F2F7F4] hover:bg-green rounded-sm transition-all duration-300 cursor-default shadow-soft">
                         <div class="w-14 h-14 rounded-full bg-white group-hover:bg-white/10 flex items-center justify-center mb-6 text-green group-hover:text-accent transition-colors duration-300 shadow-sm">
                             <i data-lucide="volume-2" class="w-7 h-7"></i>
                         </div>
-                        <h3 class="text-xl font-cinzel font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Evangelização</h3>
+                        <h3 class="text-xl font-lavish font-bold text-greenDark group-hover:text-white mb-3 transition-colors">Evangelização</h3>
                         <p class="text-stone-600 group-hover:text-white/80 text-sm leading-relaxed transition-colors font-sans">Acústica e estrutura modernas para que a Palavra de Deus ecoe com clareza.</p>
                     </div>
                 </div>
@@ -442,7 +459,7 @@
         <section id="como-ajudar" class="py-24 bg-concrete bg-stone-100">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-cinzel font-bold text-greenDark mb-6">3 Pilares de Apoio</h2>
+                    <h2 class="text-3xl md:text-5xl font-lavish font-bold text-greenDark mb-6">3 Pilares de Apoio</h2>
                     <p class="text-stone-600 max-w-2xl mx-auto text-lg font-serif">
                         Escolha como você pode contribuir para alcançarmos nossa meta.
                     </p>
@@ -451,34 +468,34 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-start">
                     
                     <!-- Card 1 -->
-                    <div class="flex flex-col h-full rounded-sm overflow-hidden transition-all duration-300 bg-white text-[#1C1917] shadow-lg border-t-4 border-primary">
+                    <div class="flex flex-col h-full rounded-sm overflow-hidden transition-all duration-300 bg-white text-[#1C1917] shadow-soft border-t-4 border-primary">
                         <div class="p-8 flex flex-col h-full">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 text-2xl shadow-sm bg-stone-100 text-primary">
                                 <i data-lucide="handshake" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 font-cinzel text-green">Parcerias Empresariais</h3>
+                            <h3 class="text-2xl font-bold mb-2 font-lavish text-green">Parcerias Empresariais</h3>
                             <p class="text-sm mb-8 font-sans text-stone-500">Pilar de grandes doações e visibilidade.</p>
                             <ul class="space-y-4 mb-8 flex-grow">
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-primary"></span><span class="text-stone-600">Doação de materiais de construção</span></li>
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-primary"></span><span class="text-stone-600">Patrocínio de etapas completas</span></li>
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-primary"></span><span class="text-stone-600">Sua marca em placas no tapume</span></li>
                             </ul>
-                            <button class="w-full py-4 rounded-sm font-bold text-sm transition-all flex items-center justify-center gap-2 uppercase tracking-wide bg-[#1C1917] text-white hover:bg-[#333]">
+                            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Represento%20uma%20empresa%20e%20gostaria%20de%20ser%20um%20Parceiro%20da%20obra." target="_blank" class="w-full py-4 rounded-sm font-bold text-sm transition-all flex items-center justify-center gap-2 uppercase tracking-wide bg-[#1C1917] text-white hover:bg-[#333] font-sans">
                                 Seja um Parceiro <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Card 2 (Primary) -->
-                    <div class="flex flex-col h-full rounded-sm overflow-hidden transition-all duration-300 bg-green text-white shadow-2xl scale-105 ring-4 ring-accent/30 relative z-10">
-                        <div class="bg-accent text-greenDark text-center py-2 text-xs font-bold uppercase tracking-widest font-sans">
+                    <div class="flex flex-col h-full rounded-sm overflow-hidden transition-all duration-300 bg-green text-white shadow-xl scale-105 ring-4 ring-accent/30 relative z-10">
+                        <div class="bg-accent text-greenDark text-center py-2 text-xs font-bold uppercase tracking-widest font-sans texture-grain">
                             Foco do Momento
                         </div>
                         <div class="p-8 flex flex-col h-full">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 text-2xl shadow-sm bg-white/10 text-accent">
                                 <i data-lucide="brick-wall" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 font-cinzel text-white">Quaresma 2026</h3>
+                            <h3 class="text-2xl font-bold mb-2 font-lavish text-white">Quaresma 2026</h3>
                             <p class="text-sm mb-8 font-sans text-white/70">Campanha ativa: Ondas de Arrecadação.</p>
                             <ul class="space-y-4 mb-8 flex-grow">
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-accent"></span><span class="text-white/90">Adquira o 'Tijolinho da Quaresma'</span></li>
@@ -486,28 +503,28 @@
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-accent"></span><span class="text-white/90">Participe dos eventos paroquiais</span></li>
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-accent"></span><span class="text-white/90">Meta de 40 dias de mobilização</span></li>
                             </ul>
-                            <button class="w-full py-4 rounded-sm font-bold text-sm transition-all flex items-center justify-center gap-2 uppercase tracking-wide bg-primary text-white hover:bg-primaryHover">
+                            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Quero%20participar%20da%20Campanha%20da%20Quaresma%202026." target="_blank" class="w-full py-4 rounded-sm font-bold text-sm transition-all flex items-center justify-center gap-2 uppercase tracking-wide bg-primary text-white hover:bg-primaryHover font-sans texture-grain">
                                 Participar da Campanha <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="flex flex-col h-full rounded-sm overflow-hidden transition-all duration-300 bg-white text-[#1C1917] shadow-lg border-t-4 border-primary">
+                    <div class="flex flex-col h-full rounded-sm overflow-hidden transition-all duration-300 bg-white text-[#1C1917] shadow-soft border-t-4 border-primary">
                         <div class="p-8 flex flex-col h-full">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 text-2xl shadow-sm bg-stone-100 text-primary">
                                 <i data-lucide="shield" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="text-2xl font-bold mb-2 font-cinzel text-green">Receita Recorrente</h3>
+                            <h3 class="text-2xl font-bold mb-2 font-lavish text-green">Receita Recorrente</h3>
                             <p class="text-sm mb-8 font-sans text-stone-500">Sustentabilidade financeira a longo prazo.</p>
                             <ul class="space-y-4 mb-8 flex-grow">
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-primary"></span><span class="text-stone-600">Clube São José (Guardiões)</span></li>
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-primary"></span><span class="text-stone-600">Pix Mensal Programado</span></li>
                                 <li class="flex items-start gap-3 text-sm font-sans"><span class="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0 bg-primary"></span><span class="text-stone-600">Padrinhos da Obra</span></li>
                             </ul>
-                            <button class="w-full py-4 rounded-sm font-bold text-sm transition-all flex items-center justify-center gap-2 uppercase tracking-wide bg-[#1C1917] text-white hover:bg-[#333]">
+                            <a href="https://wa.me/554796850181?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20doa%C3%A7%C3%A3o%20recorrente." target="_blank" class="w-full py-4 rounded-sm font-bold text-sm transition-all flex items-center justify-center gap-2 uppercase tracking-wide bg-[#1C1917] text-white hover:bg-[#333] font-sans">
                                 Agendar Doação <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -522,7 +539,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                 <div class="lg:col-span-2">
                     <div class="mb-6">
-                        <img src="assets/logo.png" alt="Logo Nova Paróquia" class="h-12 w-auto">
+                        <img src="assets/logo.png" alt="Logo Nova Paróquia" class="h-32 w-auto">
                     </div>
                     <p class="mb-8 max-w-md leading-relaxed font-serif italic text-white/80">
                         "A Quaresma é o tempo. São José é o modelo. A comunidade é a força."
@@ -535,7 +552,7 @@
                 </div>
 
                 <div>
-                    <h5 class="text-accent font-bold mb-6 font-cinzel tracking-wider">Localização</h5>
+                    <h5 class="text-accent font-bold mb-6 font-lavish tracking-wider">Localização</h5>
                     <ul class="space-y-4 font-sans">
                         <li class="flex items-start gap-3">
                             <i data-lucide="map-pin" class="text-primary shrink-0 mt-1 w-[18px] h-[18px]"></i>
@@ -549,7 +566,7 @@
                 </div>
 
                 <div>
-                    <h5 class="text-accent font-bold mb-6 font-cinzel tracking-wider">Fale Conosco</h5>
+                    <h5 class="text-accent font-bold mb-6 font-lavish tracking-wider">Fale Conosco</h5>
                     <ul class="space-y-4 font-sans">
                         <li class="flex items-center gap-3">
                             <i data-lucide="phone" class="text-primary shrink-0 w-[18px] h-[18px]"></i>
@@ -645,7 +662,7 @@
         const shirts = [
             {
                 name: "Modelo 'Fé e Obras' - Verde",
-                colorClass: "bg-[#2E5D34]",
+                colorClass: "bg-[#62693f]",
                 description: "Estampa exclusiva com o brasão em dourado sobre o verde litúrgico.",
                 image: "assets/camiseta_verde.jpeg"
             },
@@ -673,6 +690,7 @@
             const descElement = document.getElementById('shirt-desc');
             const counterElement = document.getElementById('shirt-counter');
             const indicatorsContainer = document.getElementById('carousel-indicators');
+            const shirtBtn = document.getElementById('shirt-btn');
 
             // Update Color Background
             bgElement.className = `h-96 relative flex items-center justify-center transition-colors duration-500 ease-in-out overflow-hidden ${shirt.colorClass}`;
@@ -683,6 +701,10 @@
             nameElement.innerText = shirt.name;
             descElement.innerText = shirt.description + " Tecido DryFit de alta qualidade, perfeito para usar em eventos e celebrações.";
             counterElement.innerText = `Opção ${activeShirtIndex + 1} de 3`;
+
+            // Update WhatsApp Link
+            const encodedMsg = encodeURIComponent(`Olá! Gostaria de encomendar uma Camiseta Oficial da campanha: ${shirt.name}.`);
+            shirtBtn.href = `https://wa.me/554796850181?text=${encodedMsg}`;
 
             // Update Indicators
             indicatorsContainer.innerHTML = '';
