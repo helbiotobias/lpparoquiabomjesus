@@ -58,6 +58,10 @@
         .bg-concrete {
             background-image: url('https://www.transparenttextures.com/patterns/concrete-wall.png');
         }
+        /* Transition for carousel background */
+        #carousel-bg {
+            transition: background-color 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-stone-800 bg-[#FAFAF9] selection:bg-primary selection:text-white">
@@ -200,16 +204,16 @@
                                 <i data-lucide="hammer" class="w-5 h-5"></i>
                             </div>
                             
-                            <!-- Foto da Igreja -->
-                            <div class="rounded-t-full rounded-b-lg w-full h-80 bg-gradient-to-b from-stone-50 to-white flex items-end justify-center overflow-hidden relative">
-                                <img src="assets/igreja.png" alt="Projeto da Nova Igreja" class="w-full h-full object-contain hover:scale-105 transition-transform duration-700 relative z-10 drop-shadow-xl p-4" onerror="this.style.display='none'; document.getElementById('placeholder-church').style.display='flex'">
+                            <!-- Foto da Igreja (AUMENTADA 300% com scale-150 e container maior) -->
+                            <div class="rounded-t-full rounded-b-lg w-full h-[500px] bg-gradient-to-b from-stone-50 to-white flex items-end justify-center overflow-visible relative">
+                                <img src="assets/igreja.png" alt="Projeto da Nova Igreja" class="w-full h-full object-contain scale-150 origin-bottom hover:scale-[1.6] transition-transform duration-700 relative z-10 drop-shadow-xl p-4" onerror="this.style.display='none'; document.getElementById('placeholder-church').style.display='flex'">
                                 <div id="placeholder-church" class="absolute inset-0 hidden items-center justify-center text-stone-200 z-0">
                                     <i data-lucide="church" class="w-20 h-20 opacity-30"></i>
                                 </div>
                             </div>
                             
                             <!-- Termômetro -->
-                            <div class="p-6 bg-white rounded-b-lg relative z-20">
+                            <div class="p-6 bg-white rounded-b-lg relative z-20 border-t border-stone-100">
                                 <div class="flex justify-between items-end mb-2">
                                     <div>
                                         <h3 class="font-cinzel text-green font-bold text-lg">Termômetro da Obra</h3>
@@ -261,22 +265,21 @@
                         </div>
                         
                         <!-- Área do Carrossel -->
-                        <div id="carousel-bg" class="h-96 relative flex items-center justify-center transition-colors duration-500 ease-in-out bg-[#2E5D34] overflow-hidden">
+                        <div id="carousel-bg" class="h-96 relative flex items-center justify-center bg-[#2E5D34] overflow-hidden">
                             
-                            <!-- Navegação -->
-                            <button onclick="prevShirt()" class="absolute left-4 z-20 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors backdrop-blur-sm">
+                            <!-- Navegação (Event Listeners corrigidos no JS) -->
+                            <button id="prev-btn" class="absolute left-4 z-20 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors backdrop-blur-sm cursor-pointer">
                                 <i data-lucide="chevron-left" class="w-6 h-6"></i>
                             </button>
-                            <button onclick="nextShirt()" class="absolute right-4 z-20 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors backdrop-blur-sm">
+                            <button id="next-btn" class="absolute right-4 z-20 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors backdrop-blur-sm cursor-pointer">
                                 <i data-lucide="chevron-right" class="w-6 h-6"></i>
                             </button>
 
-                            <!-- Imagem da Camiseta (Full Cover) -->
-                            <div class="relative w-full h-full transition-opacity duration-300" id="shirt-container">
-                                <!-- w-full h-full object-cover para preencher o quadrado -->
-                                <img id="shirt-image" src="assets/camiseta_verde.jpeg" alt="Camiseta Verde" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            <!-- Imagem da Camiseta -->
+                            <div class="relative w-full h-full flex items-center justify-center p-8 transition-opacity duration-300" id="shirt-container">
+                                <img id="shirt-image" src="assets/camiseta_verde.jpeg" alt="Camiseta Verde" class="max-h-full max-w-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500">
                                 
-                                <span id="shirt-counter" class="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-xs font-cinzel font-bold uppercase tracking-widest opacity-90 bg-black/40 text-white px-4 py-1.5 rounded-full backdrop-blur-sm">
+                                <span id="shirt-counter" class="absolute bottom-16 text-xs font-cinzel font-bold uppercase tracking-widest opacity-90 bg-black/40 text-white px-4 py-1.5 rounded-full backdrop-blur-sm">
                                     Opção 1 de 3
                                 </span>
                             </div>
@@ -289,7 +292,7 @@
                         
                         <div class="p-8 flex flex-col flex-grow bg-white">
                             <div class="mb-4">
-                                <h3 class="font-cinzel text-2xl font-bold text-greenDark">Camiseta Oficial 2026</h3>
+                                <h3 id="shirt-title" class="font-cinzel text-2xl font-bold text-greenDark">Camiseta Oficial 2026</h3>
                                 <p id="shirt-name" class="text-primary text-xs font-bold uppercase tracking-widest mt-1">
                                     Modelo 'Fé e Obras' - Verde
                                 </p>
@@ -303,15 +306,16 @@
                         </div>
                     </div>
 
-                    <!-- Card: Tijolinho -->
+                    <!-- Card: Tijolinho (IMAGEM AUMENTADA) -->
                     <div class="group relative bg-[#F2F7F4] rounded-sm overflow-hidden border border-stone-200 hover:border-primary transition-all duration-300 flex flex-col shadow-lg">
                         <div class="absolute top-4 right-4 z-10 bg-primary text-white text-xs font-bold px-3 py-1 uppercase tracking-widest rounded-sm shadow-md">
                             Símbolo de Fé
                         </div>
                         
                         <div class="h-96 bg-stone-200 flex items-center justify-center relative overflow-hidden group-hover:bg-stone-300 transition-colors">
-                            <div class="flex flex-col items-center transform group-hover:scale-105 transition-transform duration-500">
-                                <img src="assets/tijolinho.png" alt="Tijolinho da Quaresma" class="w-64 h-auto object-contain drop-shadow-xl">
+                            <div class="flex flex-col items-center transform group-hover:scale-105 transition-transform duration-500 w-full px-8">
+                                <!-- Classe w-10/12 para ocupar 83% da largura do card -->
+                                <img src="assets/tijolinho.png" alt="Tijolinho da Quaresma" class="w-10/12 h-auto object-contain drop-shadow-xl">
                                 <span class="mt-6 text-sm font-sans uppercase tracking-widest text-stone-500 font-bold opacity-80">
                                     Tijolinho da Quaresma
                                 </span>
@@ -653,7 +657,7 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // 6. Logic: Shirt Carousel
+        // 6. Logic: Shirt Carousel (CORRIGIDO)
         const shirts = [
             {
                 name: "Modelo 'Fé e Obras' - Verde",
@@ -668,4 +672,58 @@
                 image: "assets/camiseta_roxa.jpeg"
             },
             {
-                name: "Modelo 'Luz do Mundo' - Br
+                name: "Modelo 'Luz do Mundo' - Branca",
+                colorClass: "bg-[#F5F5F4]",
+                description: "Design minimalista e elegante para o dia a dia, com detalhes em dourado.",
+                image: "assets/camiseta_branca.jpeg"
+            }
+        ];
+        
+        let activeShirtIndex = 0;
+
+        function updateCarousel() {
+            const shirt = shirts[activeShirtIndex];
+            const bgElement = document.getElementById('carousel-bg');
+            const imgElement = document.getElementById('shirt-image');
+            const nameElement = document.getElementById('shirt-name');
+            const descElement = document.getElementById('shirt-desc');
+            const counterElement = document.getElementById('shirt-counter');
+            const indicatorsContainer = document.getElementById('carousel-indicators');
+
+            // Update Color Background
+            bgElement.className = `h-96 relative flex items-center justify-center transition-colors duration-500 ease-in-out overflow-hidden ${shirt.colorClass}`;
+
+            // Update Content
+            imgElement.src = shirt.image;
+            imgElement.alt = shirt.name;
+            nameElement.innerText = shirt.name;
+            descElement.innerText = shirt.description + " Tecido DryFit de alta qualidade, perfeito para usar em eventos e celebrações.";
+            counterElement.innerText = `Opção ${activeShirtIndex + 1} de 3`;
+
+            // Update Indicators
+            indicatorsContainer.innerHTML = '';
+            shirts.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.onclick = () => { activeShirtIndex = idx; updateCarousel(); };
+                dot.className = `w-2.5 h-2.5 rounded-full transition-all shadow-sm ${idx === activeShirtIndex ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/60'}`;
+                indicatorsContainer.appendChild(dot);
+            });
+        }
+
+        // Event Listeners for Buttons
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            activeShirtIndex = (activeShirtIndex === 0) ? shirts.length - 1 : activeShirtIndex - 1;
+            updateCarousel();
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            activeShirtIndex = (activeShirtIndex + 1) % shirts.length;
+            updateCarousel();
+        });
+
+        // Initialize Carousel
+        updateCarousel();
+
+    </script>
+</body>
+</html>
