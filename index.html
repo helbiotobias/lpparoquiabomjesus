@@ -58,14 +58,23 @@
         /* Avatar stack */
         .avatar-stack .av { width:32px; height:32px; border-radius:9999px; border:2px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; margin-left:-8px; }
         .avatar-stack .av:first-child { margin-left:0; }
+        /* Hero timer boxes (light bg) */
+        .timer-box-light { background:#fff; border:1px solid #e7e2d8; border-radius:1rem; }
+        /* Rotating quote fade */
+        #quote-display { transition: opacity 0.6s ease; }
+        #quote-display.fade-out { opacity: 0; }
+        /* Video overlay */
+        #video-overlay { cursor: pointer; }
+        /* Progress bar hero */
+        #hero-progress-fill { transition: width 2.5s ease-out; }
     </style>
 </head>
-<body class="font-sans antialiased text-stone-800 bg-[#FAFAF9] selection:bg-primary selection:text-white">
+<body class="font-sans antialiased text-stone-800 bg-[#F4EFE8] selection:bg-primary selection:text-white">
 
 <!-- =====================================================================
      HEADER
 ===================================================================== -->
-<header id="main-header" class="fixed w-full z-50 transition-all duration-300 py-4 bg-transparent">
+<header id="main-header" class="fixed w-full z-50 transition-all duration-300 py-3 bg-greenDark/98 shadow-md">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <img src="assets/logo.png" alt="Logo Nova Paróquia" class="h-16 md:h-20 w-auto object-contain drop-shadow-md transition-all duration-300">
         <nav class="hidden md:flex items-center gap-6">
@@ -170,109 +179,147 @@
 <!-- =====================================================================
      1. HERO
 ===================================================================== -->
-<section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden pt-20 pb-32">
-    <div class="absolute inset-0 z-0">
-        <div class="hero-overlay absolute inset-0 z-10"></div>
-        <div class="absolute inset-0 bg-pattern opacity-5 z-20"></div>
-        <div class="absolute -top-20 -right-20 w-[600px] h-[600px] bg-primary rounded-full opacity-10 blur-3xl z-10 animate-float"></div>
-        <div class="absolute bottom-0 -left-20 w-[500px] h-[500px] bg-green rounded-full opacity-15 blur-3xl z-10"></div>
-    </div>
+<section id="inicio" class="pt-20 pb-14 bg-[#F4EFE8]">
+    <div class="container mx-auto px-4 max-w-2xl">
 
-    <div class="container mx-auto px-4 z-20 relative flex flex-col items-center">
+        <!-- Headline dois tons -->
+        <div class="text-center mb-4 px-2">
+            <h1 class="font-lavish text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-3">
+                <span class="text-greenDark">Construção da Igreja</span><br/>
+                <span class="text-primary">Senhor Bom Jesus.</span>
+            </h1>
+            <p class="text-stone-500 text-sm sm:text-base leading-relaxed max-w-lg mx-auto">
+                "A obra não é apenas estrutural. Ela é unidade, conversão e evangelização."
+            </p>
+        </div>
 
-        <!-- Prova social com avatares -->
-        <div class="flex items-center gap-3 mb-6">
+        <!-- Prova social -->
+        <div class="flex items-center justify-center gap-2 mb-5">
             <div class="avatar-stack flex">
                 <div class="av bg-primary">MJ</div>
                 <div class="av bg-green">RC</div>
                 <div class="av bg-greenDark">FS</div>
                 <div class="av bg-amber-600">LP</div>
-                <div class="av bg-primary/80">+</div>
+                <div class="av" style="background:#8B5CF6">+</div>
             </div>
-            <span class="text-white/80 text-sm font-bold">+500 famílias já doaram este mês</span>
+            <span class="text-stone-600 text-sm font-bold">+500 famílias já doaram este mês</span>
         </div>
 
-        <!-- Headline -->
-        <h1 class="font-lavish text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-5 leading-[1.1] max-w-4xl animate-fade-in-up">
-            Construção da Igreja<br/>
-            <span class="text-accent">Senhor Bom Jesus</span>
-        </h1>
+        <!-- CARD PRINCIPAL -->
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-stone-100">
 
-        <p class="font-sans text-base md:text-lg text-white/80 mb-8 max-w-2xl leading-relaxed animate-fade-in-up">
-            "A obra não é apenas estrutural. Ela é unidade, conversão e evangelização."<br/>
-            <strong class="text-accent">Doe pelo Dizify e concorra a um super prêmio!</strong>
-        </p>
+            <!-- ── ÁREA DE VÍDEO ── -->
+            <div class="relative" style="aspect-ratio:16/9; background:#1a1a1a;">
+                <!-- Logo flutuante sobre o vídeo -->
+                <div class="absolute top-3 left-3 z-20 pointer-events-none">
+                    <img src="assets/logo.png" alt="Logo" class="h-14 w-auto drop-shadow-lg">
+                </div>
 
-        <!-- Barra de progresso com métricas -->
-        <div class="w-full max-w-2xl bg-white/5 border border-white/10 rounded-2xl p-5 mb-8 backdrop-blur-sm">
-            <div class="grid grid-cols-3 gap-4 mb-4 text-center">
-                <div>
-                    <div class="text-xl md:text-2xl font-bold font-lavish text-accent">33,12%</div>
-                    <div class="text-[10px] text-white/50 uppercase tracking-wider font-bold mt-0.5">da Meta Atingida</div>
+                <!-- Fundo/placeholder: troque pelo <video> ou <iframe> quando tiver a URL -->
+                <div class="absolute inset-0 overflow-hidden">
+                    <img src="assets/igreja.png" alt="Igreja Senhor Bom Jesus"
+                         class="w-full h-full object-cover opacity-60 scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-br from-greenDark/70 to-green/50"></div>
                 </div>
-                <div>
-                    <div class="text-xl md:text-2xl font-bold font-lavish text-white">+500</div>
-                    <div class="text-[10px] text-white/50 uppercase tracking-wider font-bold mt-0.5">Doadores</div>
+                <!-- Texto de apoio quando não há vídeo -->
+                <div class="absolute inset-0 hidden" id="video-placeholder-text">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <p class="text-white/40 text-sm italic">Insira o vídeo aqui</p>
+                    </div>
                 </div>
-                <div>
-                    <div class="text-xl md:text-2xl font-bold font-lavish text-accent">Maio 2026</div>
-                    <div class="text-[10px] text-white/50 uppercase tracking-wider font-bold mt-0.5">Sorteio Ativo</div>
+
+                <!-- Overlay de mudo — idêntico ao da referência -->
+                <div id="video-overlay"
+                     class="absolute inset-0 z-10 flex flex-col items-center justify-center"
+                     style="background:rgba(0,60,120,0.45); backdrop-filter:blur(2px);"
+                     onclick="unmuteVideo()">
+                    <p class="text-white font-bold text-lg sm:text-xl mb-4 drop-shadow">Seu vídeo já começou</p>
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-white flex items-center justify-center mb-4 bg-white/10">
+                        <i data-lucide="volume-x" class="w-8 h-8 sm:w-10 sm:h-10 text-white"></i>
+                    </div>
+                    <p class="text-white font-bold text-lg sm:text-xl drop-shadow">Clique para ouvir</p>
                 </div>
             </div>
-            <div class="h-3 w-full bg-white/10 rounded-full overflow-hidden">
-                <div id="progress-bar" class="h-full rounded-full transition-all duration-[2500ms] ease-out w-0" style="background:linear-gradient(90deg,#f69540,#fbbf24)">
-                    <div class="h-full bg-white/20 animate-pulse rounded-full"></div>
+
+            <!-- ── BARRA DE PROGRESSO ── -->
+            <div class="bg-blue-50 px-5 py-4 border-b border-blue-100">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="flex items-center gap-1.5 text-blue-700 text-xs font-bold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse inline-block"></span>
+                        MAIO 2026
+                    </span>
+                    <span class="text-[11px] font-bold text-white bg-blue-600 px-2.5 py-0.5 rounded-full">33%</span>
+                </div>
+                <div class="h-2.5 bg-blue-200 rounded-full overflow-hidden mb-3">
+                    <div id="hero-progress-fill" class="h-full bg-blue-600 rounded-full w-0"></div>
+                </div>
+                <div class="grid grid-cols-3 text-center gap-2">
+                    <div>
+                        <p class="font-bold text-stone-800 text-sm sm:text-base">+500</p>
+                        <p class="text-[10px] text-stone-400 uppercase tracking-wider font-bold">doadores</p>
+                    </div>
+                    <div class="border-x border-blue-200">
+                        <p class="font-bold text-stone-800 text-sm sm:text-base">33,12%</p>
+                        <p class="text-[10px] text-stone-400 uppercase tracking-wider font-bold">arrecadado</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-stone-800 text-sm sm:text-base">Meta Ativa</p>
+                        <p class="text-[10px] text-stone-400 uppercase tracking-wider font-bold">pública</p>
+                    </div>
                 </div>
             </div>
-            <p class="text-right text-[10px] text-white/40 mt-1 font-bold">Meta Pública Atual</p>
+
+            <!-- ── CTA ── -->
+            <div class="px-5 pt-5 pb-3">
+                <button onclick="openModal()"
+                        class="btn-shimmer w-full py-5 rounded-2xl font-bold text-white text-base sm:text-lg uppercase tracking-wider shadow-glow texture-grain flex items-center justify-center gap-2">
+                    <i data-lucide="heart" class="w-5 h-5 fill-current"></i> QUERO AJUDAR AGORA
+                </button>
+            </div>
+
+            <!-- ── PASSAGEM BÍBLICA ROTATIVA ── -->
+            <div class="px-6 pt-2 pb-4">
+                <div id="quote-display" class="border-l-4 border-primary/40 pl-4">
+                    <p id="quote-text" class="text-stone-600 text-sm italic font-serif leading-relaxed"></p>
+                    <p id="quote-ref"  class="text-primary text-[11px] font-bold mt-1.5 uppercase tracking-wider"></p>
+                </div>
+            </div>
+
+            <!-- ── SELO DE SEGURANÇA ── -->
+            <div class="pb-5 text-center">
+                <span class="inline-flex items-center gap-1.5 text-xs text-stone-400 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+                    Pagamento 100% seguro e verificado
+                </span>
+            </div>
         </div>
 
-        <!-- CTA principal -->
-        <button onclick="openModal()" class="btn-shimmer px-12 py-5 rounded-full text-white font-bold font-sans shadow-glow flex items-center gap-2 uppercase tracking-wider text-base texture-grain mb-5 animate-fade-in-up">
-            <i data-lucide="heart" class="w-5 h-5 fill-current"></i> QUERO AJUDAR AGORA
-        </button>
-
-        <!-- Countdown -->
-        <div class="mb-6">
-            <p class="text-white/40 text-xs uppercase tracking-widest mb-3 font-bold">Fim do Sorteio em:</p>
-            <div class="flex gap-3 justify-center">
-                <div class="timer-box rounded-2xl px-4 py-3 min-w-[68px]">
-                    <span id="timer-days" class="block text-3xl font-bold text-accent font-lavish tabular-nums leading-none">00</span>
-                    <span class="block text-[9px] uppercase text-white/50 font-bold tracking-widest mt-1">Dias</span>
+        <!-- Countdown abaixo do card -->
+        <div class="mt-8 text-center">
+            <p class="text-stone-400 text-[10px] uppercase tracking-widest mb-3 font-bold">Fim do Sorteio em:</p>
+            <div class="flex gap-2 sm:gap-3 justify-center">
+                <div class="timer-box-light px-3 py-2.5 sm:px-4 sm:py-3 min-w-[60px]">
+                    <span id="timer-days" class="block text-2xl sm:text-3xl font-bold text-greenDark font-lavish tabular-nums leading-none">00</span>
+                    <span class="block text-[8px] uppercase text-stone-400 font-bold tracking-widest mt-1">Dias</span>
                 </div>
-                <div class="text-white/20 text-3xl font-light self-center pb-4">:</div>
-                <div class="timer-box rounded-2xl px-4 py-3 min-w-[68px]">
-                    <span id="timer-hours" class="block text-3xl font-bold text-white font-lavish tabular-nums leading-none">00</span>
-                    <span class="block text-[9px] uppercase text-white/50 font-bold tracking-widest mt-1">Horas</span>
+                <div class="text-stone-300 text-2xl font-light self-center pb-3">:</div>
+                <div class="timer-box-light px-3 py-2.5 sm:px-4 sm:py-3 min-w-[60px]">
+                    <span id="timer-hours" class="block text-2xl sm:text-3xl font-bold text-stone-700 font-lavish tabular-nums leading-none">00</span>
+                    <span class="block text-[8px] uppercase text-stone-400 font-bold tracking-widest mt-1">Hrs</span>
                 </div>
-                <div class="text-white/20 text-3xl font-light self-center pb-4">:</div>
-                <div class="timer-box rounded-2xl px-4 py-3 min-w-[68px]">
-                    <span id="timer-minutes" class="block text-3xl font-bold text-white font-lavish tabular-nums leading-none">00</span>
-                    <span class="block text-[9px] uppercase text-white/50 font-bold tracking-widest mt-1">Min</span>
+                <div class="text-stone-300 text-2xl font-light self-center pb-3">:</div>
+                <div class="timer-box-light px-3 py-2.5 sm:px-4 sm:py-3 min-w-[60px]">
+                    <span id="timer-minutes" class="block text-2xl sm:text-3xl font-bold text-stone-700 font-lavish tabular-nums leading-none">00</span>
+                    <span class="block text-[8px] uppercase text-stone-400 font-bold tracking-widest mt-1">Min</span>
                 </div>
-                <div class="text-white/20 text-3xl font-light self-center pb-4 hidden sm:block">:</div>
-                <div class="timer-box rounded-2xl px-4 py-3 min-w-[68px] hidden sm:block">
-                    <span id="timer-seconds" class="block text-3xl font-bold text-primary font-lavish tabular-nums leading-none">00</span>
-                    <span class="block text-[9px] uppercase text-white/50 font-bold tracking-widest mt-1">Seg</span>
+                <div class="text-stone-300 text-2xl font-light self-center pb-3 hidden sm:block">:</div>
+                <div class="timer-box-light px-3 py-2.5 sm:px-4 sm:py-3 min-w-[60px] hidden sm:block">
+                    <span id="timer-seconds" class="block text-2xl sm:text-3xl font-bold text-primary font-lavish tabular-nums leading-none">00</span>
+                    <span class="block text-[8px] uppercase text-stone-400 font-bold tracking-widest mt-1">Seg</span>
                 </div>
             </div>
         </div>
 
-        <!-- Âncora espiritual + selo -->
-        <blockquote class="text-white/60 text-sm italic font-serif mb-3 max-w-md">
-            "A fé sem obras é morta." — Tiago 2:26
-        </blockquote>
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full">
-            <i data-lucide="shield-check" class="w-4 h-4 text-green"></i>
-            <span class="text-white/60 text-xs font-bold">Doação 100% segura e verificada pelo Dizify</span>
-        </div>
-
-    </div>
-
-    <!-- Igreja image at bottom -->
-    <div class="absolute bottom-0 left-0 right-0 z-10 h-52 pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-t from-greenDark/60 to-transparent z-10"></div>
-        <img src="assets/igreja.png" alt="Projeto da Nova Igreja" class="w-full h-full object-contain object-bottom opacity-50" onerror="this.style.display='none'">
     </div>
 </section>
 
@@ -971,17 +1018,74 @@
 <script>
     lucide.createIcons();
 
-    // Header sticky
+    // Header sticky — já inicia escuro, apenas ajusta padding
     const header = document.getElementById('main-header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            header.classList.remove('bg-transparent','py-4');
-            header.classList.add('bg-greenDark/95','backdrop-blur-sm','shadow-md','py-2');
+        if (window.scrollY > 30) {
+            header.classList.add('py-2');
+            header.classList.remove('py-3');
         } else {
-            header.classList.add('bg-transparent','py-4');
-            header.classList.remove('bg-greenDark/95','backdrop-blur-sm','shadow-md','py-2');
+            header.classList.add('py-3');
+            header.classList.remove('py-2');
         }
     });
+
+    // Progress bar hero (azul)
+    setTimeout(() => {
+        const fill = document.getElementById('hero-progress-fill');
+        if (fill) fill.style.width = '33.12%';
+    }, 600);
+
+    // Vídeo — unmute ao clicar no overlay
+    function unmuteVideo() {
+        const overlay = document.getElementById('video-overlay');
+        const video   = document.getElementById('hero-video');
+        if (video) {
+            video.muted = false;
+            video.play().catch(() => {});
+        }
+        if (overlay) {
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+            setTimeout(() => { overlay.style.display = 'none'; }, 600);
+        }
+    }
+
+    // Passagens bíblicas rotativas
+    const biblicalQuotes = [
+        { text: '"Não te esqueças de fazer o bem e de repartir o que tens."',           ref: 'Hebreus 13:16' },
+        { text: '"Dê e será dado a vós; boa medida, calcada, sacudida e transbordante."', ref: 'Lucas 6:38' },
+        { text: '"Deus ama quem dá com alegria."',                                       ref: '2 Coríntios 9:7' },
+        { text: '"Onde estiverem dois ou três reunidos em meu nome, ali estou no meio deles."', ref: 'Mateus 18:20' },
+        { text: '"A fé sem obras é morta."',                                              ref: 'Tiago 2:26' },
+        { text: '"Aquele que semeia com largueza, com largueza também colherá."',         ref: '2 Coríntios 9:6' },
+        { text: '"Amarás o teu próximo como a ti mesmo."',                                ref: 'Mateus 22:39' },
+        { text: '"Edificai uns aos outros, como de fato já fazeis."',                     ref: '1 Tessalonicenses 5:11' },
+        { text: '"Porque tive fome e me destes de comer; tive sede e me destes de beber."', ref: 'Mateus 25:35' },
+        { text: '"O amor é paciente, o amor é bondoso."',                                 ref: '1 Coríntios 13:4' },
+    ];
+    let quoteIndex = 0;
+    const quoteDisplay = document.getElementById('quote-display');
+    const quoteText    = document.getElementById('quote-text');
+    const quoteRef     = document.getElementById('quote-ref');
+
+    function showQuote(i) {
+        quoteDisplay.classList.add('fade-out');
+        setTimeout(() => {
+            quoteText.innerText = biblicalQuotes[i].text;
+            quoteRef.innerText  = biblicalQuotes[i].ref;
+            quoteDisplay.classList.remove('fade-out');
+        }, 620);
+    }
+
+    // Inicia com a primeira passagem
+    showQuote(quoteIndex);
+
+    // Rotaciona a cada 5 segundos
+    setInterval(() => {
+        quoteIndex = (quoteIndex + 1) % biblicalQuotes.length;
+        showQuote(quoteIndex);
+    }, 5000);
 
     // Mobile menu
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
