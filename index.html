@@ -1092,6 +1092,101 @@
             document.getElementById('modal-cta').href = `https://wa.me/554298618681?text=${msg}`;
         }
     });
+
+    /* ── Donation Toast Popups ─────────────────────────────────────────── */
+    (function () {
+        const donationValues = [10, 20, 30, 50, 75, 100, 150, 200];
+        const timeLabels = ['agora mesmo', 'há 1 min', 'há 2 min', 'há 3 min', 'há 5 min',
+                            'há 7 min', 'há 10 min', 'há 12 min', 'há 15 min', 'há 20 min',
+                            'há 25 min', 'há 30 min'];
+
+        let guardianShown = 0;
+        const MAX_GUARDIAN = Math.random() < 0.5 ? 1 : 2; // 1 ou 2x por sessão
+
+        function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function fmtBRL(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+
+        function showToast({ isGuardian }) {
+            const value = rand(donationValues);
+            const time  = rand(timeLabels);
+
+            const toast = document.createElement('div');
+            toast.style.cssText = [
+                'position:fixed',
+                'bottom:24px',
+                'left:50%',
+                'transform:translateX(-50%) translateY(80px)',
+                'z-index:9999',
+                'min-width:260px',
+                'max-width:320px',
+                'border-radius:14px',
+                'padding:14px 18px',
+                'display:flex',
+                'align-items:center',
+                'gap:12px',
+                'box-shadow:0 8px 32px rgba(80,12,9,0.18)',
+                'opacity:0',
+                'transition:transform .45s cubic-bezier(.34,1.56,.64,1), opacity .35s ease',
+                'pointer-events:none',
+                isGuardian
+                    ? 'background:linear-gradient(135deg,#500c09 0%,#7c1a17 100%);border:1.5px solid rgba(246,149,64,.5)'
+                    : 'background:rgba(255,255,255,0.97);border:1.5px solid rgba(246,149,64,.35)',
+            ].join(';');
+
+            if (isGuardian) {
+                toast.innerHTML = `
+                    <div style="font-size:28px;line-height:1">🏛️</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(246,149,64,.85);text-transform:uppercase;margin-bottom:2px">Guardião da Obra</div>
+                        <div style="font-size:13.5px;font-weight:700;color:#fff;line-height:1.3">Um(a) doador(a) acabou de se tornar<br><strong style="color:#f69540">Guardião da Obra</strong> da paróquia! 🙏</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:4px">${time}</div>
+                    </div>`;
+            } else {
+                toast.innerHTML = `
+                    <div style="font-size:26px;line-height:1">🧱</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#d97f30;text-transform:uppercase;margin-bottom:2px">Nova Doação</div>
+                        <div style="font-size:13.5px;font-weight:700;color:#1c1917;line-height:1.3">Alguém acabou de contribuir com <span style="color:#d97f30">${fmtBRL(value)}</span></div>
+                        <div style="font-size:11px;color:#a8a29e;margin-top:4px">${time}</div>
+                    </div>`;
+            }
+
+            document.body.appendChild(toast);
+
+            // slide in
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    toast.style.opacity = '1';
+                    toast.style.transform = 'translateX(-50%) translateY(0)';
+                });
+            });
+
+            // slide out after 4.5 s
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(80px)';
+                setTimeout(() => toast.remove(), 400);
+            }, 4500);
+        }
+
+        function scheduleNext() {
+            // intervalo entre 25 s e 75 s para não incomodar
+            const delay = 25000 + Math.random() * 50000;
+
+            setTimeout(() => {
+                const canGuardian = guardianShown < MAX_GUARDIAN;
+                // guardião: ~8 % de chance se ainda não atingiu o limite
+                const isGuardian = canGuardian && Math.random() < 0.08;
+                if (isGuardian) guardianShown++;
+
+                showToast({ isGuardian });
+                scheduleNext();
+            }, delay);
+        }
+
+        // primeira doação aparece entre 8 s e 20 s após a página carregar
+        setTimeout(scheduleNext, 8000 + Math.random() * 12000);
+    })();
 </script>
 </body>
 </html>
