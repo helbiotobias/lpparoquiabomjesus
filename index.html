@@ -991,10 +991,13 @@
     // Progress bar
     setTimeout(() => { document.getElementById('progress-bar').style.width = '33.12%'; }, 500);
 
-    // Countdown
-    const targetDate = new Date('2026-05-31T23:59:59');
+    // Countdown — always targets the last day of the current month
+    function getLastDayOfCurrentMonth() {
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+    }
     function updateTimer() {
-        const diff = targetDate - new Date();
+        const diff = getLastDayOfCurrentMonth() - new Date();
         if (diff <= 0) return;
         const pad = n => String(Math.floor(n)).padStart(2,'0');
         const days  = diff / 864e5;
