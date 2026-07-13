@@ -1014,7 +1014,6 @@
     setTimeout(() => { document.getElementById('progress-bar').style.width = '33.12%'; }, 500);
 
     // Countdown
-    const targetDate = new Date('2026-07-31T23:59:59');
     function updateTimer() {
         const diff = getLastDayOfCurrentMonth() - new Date();
         if (diff <= 0) return;
