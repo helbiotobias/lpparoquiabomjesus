@@ -994,7 +994,7 @@
     // Countdown
     const targetDate = new Date('2026-07-31T23:59:59');
     function updateTimer() {
-        const diff = targetDate - new Date();
+        const diff = getLastDayOfCurrentMonth() - new Date();
         if (diff <= 0) return;
         const pad = n => String(Math.floor(n)).padStart(2,'0');
         const days  = diff / 864e5;
