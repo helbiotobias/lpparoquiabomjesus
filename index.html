@@ -537,26 +537,48 @@
 
         <!-- Prêmio do mês -->
         <div class="max-w-4xl mx-auto mb-16">
-            <div class="bg-green rounded-3xl overflow-hidden shadow-soft texture-grain" style="box-shadow:0 0 60px rgba(246,149,64,0.2),0 20px 60px rgba(0,0,0,0.3)">
-                <div class="grid md:grid-cols-2 items-center">
-                    <div class="p-10 md:p-12">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/20 text-accent rounded-full text-xs font-bold mb-5 border border-accent/30">
-                            <i data-lucide="star" class="w-3 h-3 fill-current"></i> Prêmio de Julho 2026
+            <div class="bg-white rounded-3xl overflow-hidden shadow-soft border border-stone-100" style="box-shadow:0 0 60px rgba(246,149,64,0.15),0 20px 60px rgba(0,0,0,0.12)">
+                <div class="grid md:grid-cols-2 items-stretch">
+                    <div class="p-8 md:p-10">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-greenDark text-white rounded-full text-xs font-bold mb-5">
+                            <i data-lucide="star" class="w-3 h-3 fill-current text-accent"></i> Prêmio de Julho 2026
                         </div>
-                        <h3 class="font-lavish text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">Construtores da Obra</h3>
-                        <h4 class="font-lavish text-2xl text-accent font-bold mb-6">Prêmios do Mês</h4>
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center gap-3 text-white/85 text-sm"><span class="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3 h-3 text-accent"></i></span> Cartela de bingo <span class="text-white/50">(concorra ao prêmio de R$ 50 mil)</span></li>
-                            <li class="flex items-center gap-3 text-white/85 text-sm"><span class="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3 h-3 text-accent"></i></span> + Churrasco no dia da Festa do Senhor Bom Jesus</li>
-                            <li class="flex items-center gap-3 text-white/85 text-sm"><span class="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3 h-3 text-accent"></i></span> + Camiseta 50 anos da Paróquia Senhor Bom Jesus</li>
-                            <li class="flex items-center gap-3 text-white/85 text-sm"><span class="w-5 h-5 rounded-full bg-accent/20 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-3 h-3 text-accent"></i></span> Sorteio ao vivo no Instagram</li>
-                        </ul>
+                        <h3 class="font-lavish text-3xl md:text-4xl font-bold text-greenDark mb-1 leading-tight">Construtores da Obra</h3>
+                        <p class="text-stone-500 text-sm mb-6 font-serif italic">Doe pelo Dizify e concorra a um super prêmio!</p>
+
+                        <!-- Dizify -->
+                        <div class="rounded-2xl p-4 mb-6 flex items-start gap-3" style="background:#0f8b8d">
+                            <div class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                                <i data-lucide="hand-coins" class="w-4 h-4 text-white"></i>
+                            </div>
+                            <div>
+                                <span class="inline-block bg-white text-[#0f8b8d] rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide mb-1.5">Dizify</span>
+                                <p class="text-white/95 text-sm leading-snug">Durante todo o mês, cada doação realizada pelo <strong>Dizify</strong> garante automaticamente a sua participação no sorteio.</p>
+                            </div>
+                        </div>
+
+                        <p class="text-greenDark/60 text-xs font-bold uppercase tracking-widest mb-3">Prêmios do mês</p>
+                        <div class="space-y-2.5 mb-8">
+                            <div class="rounded-xl px-4 py-3.5 flex items-center gap-3 bg-green">
+                                <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0"><i data-lucide="ticket" class="w-4 h-4 text-accent"></i></div>
+                                <p class="text-white text-sm leading-snug"><strong>Cartela de bingo</strong><br class="sm:hidden"> <span class="text-white/70">concorra ao prêmio de R$ 50 mil reais</span></p>
+                            </div>
+                            <div class="rounded-xl px-4 py-3.5 flex items-center gap-3 bg-greenDark">
+                                <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0"><i data-lucide="utensils" class="w-4 h-4 text-accent"></i></div>
+                                <p class="text-white text-sm leading-snug">+ <strong>Churrasco</strong> no dia da Festa do Senhor Bom Jesus</p>
+                            </div>
+                            <div class="rounded-xl px-4 py-3.5 flex items-center gap-3 bg-green">
+                                <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0"><i data-lucide="shirt" class="w-4 h-4 text-accent"></i></div>
+                                <p class="text-white text-sm leading-snug">+ <strong>Camiseta 50 anos</strong> da Paróquia Senhor Bom Jesus</p>
+                            </div>
+                        </div>
+
                         <button onclick="openModal()" class="btn-shimmer inline-flex items-center gap-2 px-8 py-4 text-white font-bold uppercase tracking-wide text-sm rounded-full shadow-glow texture-grain">
                             <i data-lucide="heart" class="w-4 h-4 fill-current"></i> Participar do Sorteio
                         </button>
                     </div>
-                    <div class="flex items-center justify-center p-2 pb-8 md:pb-2 relative">
-                        <img src="assets/premio_junho.jpg" alt="Camiseta 50 anos da Paróquia Senhor Bom Jesus" class="w-full max-w-[300px] md:max-w-[520px] aspect-square object-cover drop-shadow-2xl rounded-2xl mx-auto">
+                    <div class="flex items-center justify-center p-2 pb-8 md:pb-2 relative bg-[#F2F7F4]">
+                        <img src="assets/premio_junho.jpg" alt="Camiseta 50 anos da Paróquia Senhor Bom Jesus" class="w-full max-w-[300px] md:max-w-[420px] aspect-square object-cover drop-shadow-2xl rounded-2xl mx-auto">
                         <div class="absolute bottom-2 md:bottom-8 left-1/2 -translate-x-1/2">
                             <a href="https://www.instagram.com/psbomjesus/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-accent text-greenDark rounded-full text-xs font-bold hover:opacity-90 transition-opacity">
                                 <i data-lucide="video" class="w-3 h-3"></i> Ao Vivo no Instagram
@@ -992,7 +1014,6 @@
     setTimeout(() => { document.getElementById('progress-bar').style.width = '33.12%'; }, 500);
 
     // Countdown
-    const targetDate = new Date('2026-07-31T23:59:59');
     function updateTimer() {
         const diff = getLastDayOfCurrentMonth() - new Date();
         if (diff <= 0) return;
