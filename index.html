@@ -1010,6 +1010,10 @@
     setTimeout(() => { document.getElementById('progress-bar').style.width = '33.12%'; }, 500);
 
     // Countdown
+    function getLastDayOfCurrentMonth() {
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+    }
     function updateTimer() {
         const diff = getLastDayOfCurrentMonth() - new Date();
         if (diff <= 0) return;
